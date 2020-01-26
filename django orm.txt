@@ -1,0 +1,10 @@
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Django ORM<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+from django.db.models import Count
+--------------------Blog.objects.values('entry__authors', entries=Count('entry'))
+********************<QuerySet [{'entry__authors': 1, 'entries': 20}, {'entry__authors': 1, 'entries': 13}]>
+--------------------Blog.objects.values('entry__authors').annotate(entries=Count('entry'))
+********************<QuerySet [{'entry__authors': 1, 'entries': 33}]>
+--------------------Entry.objects.values_list('id', flat=True).order_by('id')
+********************<QuerySet [1, 2, 3, ...]>----------------------If you only pass in a single field, you can also pass in the flat parameter. If True, this will mean the returned results are single values, rather than one-tuples.
+--------------------Entry.objects.values_list('id', 'headline', named=True)
+********************<QuerySet [Row(id=1, headline='First entry'), ...]>----------------pass named=True to get results as a namedtuple()

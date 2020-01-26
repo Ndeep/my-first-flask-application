@@ -1,0 +1,20 @@
+flask db init : create the migration repository for app
+flask db migrate -m "users table" : it just generates the migration script.
+flask db upgrade : To apply the changes to the database
+------------------------Model---------------------------------
+***db.relationship : This is not an actual database field, but a high-level view of the 
+relationship between users and posts, and for that reason it isn't in the database diagram.
+***app.shell_context_processor decorator registers the function as a shell context function. 
+When the flask shell command runs, it will invoke this function and register the items returned by 
+it in the shell session.
+----------------------Add object------------------------------
+u = User(username='john', email='john@example.com')
+db.session.add(u)
+db.session.commit()
+db.session.rollback() If at any time while working on a session there is an error.
+--------------------------------------------------------------
+-----------------------Password hash----------------------------
+from werkzeug.security import generate_password_hash, check_password_hash
+hash=generate_password_hash("abc")
+check_password_hash(hash,"abc")
+-----------------------------------------------------------------
